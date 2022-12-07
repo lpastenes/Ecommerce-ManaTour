@@ -19,5 +19,7 @@ Ecommerce-ManaTour requiere Node.js para ejecutarse.
 Instale las dependencias y inicie el servidor.
 
 $ cd Ecommerce-ManaTour-main
+
 $ npm install
+
 $ npm run dev
