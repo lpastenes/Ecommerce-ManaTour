@@ -1,13 +1,25 @@
 import Badge from 'react-bootstrap/Badge';
+import { useCartContex } from '../../context/cartContext';
 
 const CartWidget = () => {
+    const { cantidadTotal, cartList } = useCartContex()
     return (
+        <>
+        {cartList.length !== 0 ?
+            <div id="carroCompra" className="carro">
+                <button className="btn btn-ligth">                    
+                    <Badge bg="dark">{ cantidadTotal() }</Badge>
+                    <i className="fa-solid fa-cart-shopping text-dark" />
+                </button>
+            </div>
+        :
         <div id="carroCompra" className="carro">
-            <Badge bg="dark">0</Badge>
-            <a type="button" data-toggle="modal" data-target="#exampleModal">        
-                <i className="fa-solid fa-cart-shopping text-dark"/>                                                       
-            </a>                        
-        </div>
+                <button className="btn btn-ligth">                   
+                    <i className="fa-solid fa-cart-shopping text-dark" />
+                </button>
+            </div>
+        }
+        </>
     )
 }
 

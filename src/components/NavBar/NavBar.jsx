@@ -25,8 +25,12 @@ const NavBar = () => {
                             <Button className="navlink" variant="light" size="lg">Transfer</Button>
                         </Link>
                     </Nav>
-                </Navbar.Collapse>
-                <CartWidget />
+                    <Nav className="me-auto">
+                    <NavLink to="/cart">
+                        <CartWidget />
+                    </NavLink>
+                    </Nav>
+                </Navbar.Collapse>                
             </Container>
         </Navbar>
     )

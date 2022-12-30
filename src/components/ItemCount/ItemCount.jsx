@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import './ItemCount.css'
 
@@ -7,13 +7,13 @@ const ItemCount = ({ stock, inicio, onAdd }) => {
     const [count, setCount] = useState(inicio)
 
     const sumar = () => {
-        if (stock > count) {
+        if (count < stock) {
             setCount(count + 1)
         }
     }
 
     const restar = () => {
-        if (count > 1) {
+        if (count > inicio) {
             setCount(count - 1)
         }
     }

@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { gFetch } from '../../helpers/gFetch'
+import { doc, getDoc, getFirestore } from 'firebase/firestore'
 import ItemDetail from "../ItemDetail/ItemDetail"
 import Spinner from 'react-bootstrap/Spinner'
 import './ItemDetailContainer.css'
 
 const ItemDetailContainer = () => {
-
     const [DetalleProduct, setDetalleProduct] = useState([])
     const [loading, setLoading] = useState(true)
-
     const { productId } = useParams()
     
     useEffect(() => {
-        gFetch()// simula consulta a un api 
-            .then(resProd => setDetalleProduct(resProd.find (prod => prod.id === productId)))
-            .finally(() => setLoading(false))
+        const db = getFirestore()
+        const queryDoc = doc(db, 'productos', productId)
+        getDoc(queryDoc)
+        .then(resp => setDetalleProduct({ id: resp.id, ...resp.data()}))
+        .finally(() => setLoading(false))
     }, [])
 
     return (

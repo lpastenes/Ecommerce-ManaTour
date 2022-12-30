@@ -1,0 +1,33 @@
+.cart-container {
+    display: inline;    
+    justify-content: center;
+}
+
+.w-25 {
+    padding: 20px;
+}
+
+.cart-container h5 {
+    padding: 8px;
+}
+
+.formulario {
+    padding: 20px;
+}
+
+.btn-eliminar {
+    margin-left: 20px;  
+}
+
+.btn-vaciar {
+    margin-top: 10px;
+    margin-bottom: 20px;  
+}
+
+.final-compra {
+    margin-top: 20px;
+}
+
+.btn-seguir {
+    margin-top: 30px;
+}

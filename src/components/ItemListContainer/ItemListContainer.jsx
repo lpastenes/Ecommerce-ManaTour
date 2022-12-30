@@ -1,31 +1,34 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { gFetch } from '../../helpers/gFetch'
+import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore'
 import ItemList from "../ItemList/ItemList"
 import Spinner from 'react-bootstrap/Spinner'
 import './ItemListContainer.css'
 
 const ItemListContainer = (greeting) => {
-
   const [products, setProduct] = useState([])
   const [loading, setLoading] = useState(true)
-
   const { idCategoria } = useParams()
 
   useEffect(() => {
+    const db = getFirestore()
+    const queryCollection = collection(db, 'productos')
+
     if (idCategoria) {
-      gFetch()// simular consulta a un api 
-        .then(data => setProduct(data.filter(prod => prod.categoria === idCategoria)))
+      const queryFiltrada = query(queryCollection, where('categoria', '==', idCategoria))
+      getDocs(queryFiltrada)
+        .then(resp => setProduct(resp.docs.map(products => ({ id: products.id, ...products.data() }))))
         .catch(err => console.log(err))
         .finally(() => setLoading(false))
     } else {
-      gFetch()// simular consulta a un api 
-        .then(data => setProduct(data))
+      getDocs(queryCollection)
+        .then(resp => setProduct(resp.docs.map(products => ({ id: products.id, ...products.data() }))))
         .catch(err => console.log(err))
         .finally(() => setLoading(false))
     }
-  }, [idCategoria])
 
+  }, [idCategoria])
+  
   return (
     <section >
       <div >
@@ -33,7 +36,7 @@ const ItemListContainer = (greeting) => {
       </div>
       <div className='containerCard'>
         {loading ?
-          <Spinner animation="border"/>
+          <Spinner animation="border" />
           :
           <ItemList products={products} />
         }
