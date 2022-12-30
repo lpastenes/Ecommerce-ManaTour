@@ -1,6 +1,10 @@
 # Ecommerce-ManaTour
 Proyecto Ecommerce Mana Tour
 
+Puede visitar un demo del proyecto en el siguente enlace:
+
+https://iridescent-jelly-94d51a.netlify.app/
+
 Caracteristicas
 
 Utiliza librerias externas
